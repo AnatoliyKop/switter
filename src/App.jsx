@@ -17,7 +17,7 @@ function App() {
     return (
         <div className={"app"}>
             <TwitterContext.Provider value={{
-                 user, stats
+                 user, stats,setUser
             }}>
             <Navigation/>
             <Body />
