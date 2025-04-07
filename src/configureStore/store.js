@@ -1,16 +1,11 @@
-import {legacy_createStore as createStore} from "redux";
-import {twitterReducer} from "../reducers/twitterReducer.js";
+import {combineReducers, legacy_createStore as createStore} from "redux";
+import {userReducer} from "../reducers/userReducer.js";
+import {statsReducer} from "../reducers/stasReducer.js";
 
-const initialState = {
-    user: {
-        name: "Monster ",
-        avatar: 'https://gravatar.com/avatar/000?d=mp'
-    },
-    stats:{
-        followers: 0,
-        following: 0
-    }
 
-}
+const multyReducer=combineReducers({
+    user:userReducer,
+    stats:statsReducer
+})
 
-export const store=createStore(twitterReducer,initialState);
+export const store=createStore(multyReducer);
