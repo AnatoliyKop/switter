@@ -1,21 +1,27 @@
-import React, {useContext} from 'react';
-import {TwitterContext} from "../utils/context.js";
-
-
+import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {changeAvatar, changeName} from "../actions/useAction.js";
 
 
 const Avatar = ({size}) => {
-    const {user,setUser} = useContext(TwitterContext)
 
-    const changeAvatar= ()=>{
-        const newAvatar=prompt("Enter new avatar name")
-    {setUser({ ...user,avatar:`https://gravatar.com/avatar/000?d=${newAvatar}`})}
+    const {avatar,name} = useSelector(state => state.user)
+    const dispatch = useDispatch();
 
 
-
-    }
     return (
-            <img onClick={changeAvatar} className={`user-avatar ${size|| ""}`} src={user.avatar} alt={user.name}/>
+            <img
+                onClick={()=>{
+                    const url= prompt("Enter your avatar URL");
+                    dispatch(changeAvatar(url))
+                }}
+                onContextMenu={e=>{
+                    e.preventDefault();
+                    const name= prompt("Enter your name");
+                    dispatch(changeName(name));
+                }}
+
+                className={`user-avatar ${size|| ""}`} src={avatar} alt={name}/>
 
     );
 };
