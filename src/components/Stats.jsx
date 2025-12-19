@@ -1,11 +1,11 @@
 import Avatar from "./Avatar.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {changeStats} from "../store/actions/statsAction.js";
+import {changeStats} from "../feauters/stats/statsSlice.js";
 
 const Stats = () => {
-    const {name}=useSelector(state => state.user)
-const {followers,following}=useSelector(state=>state.stats)
-    const dispatch=useDispatch()
+    const {name} = useSelector(state => state.user)
+    const {followers, following} = useSelector(state => state.stats)
+    const dispatch = useDispatch()
 
     return (
         <div className={`user-stats`}>
@@ -15,19 +15,19 @@ const {followers,following}=useSelector(state=>state.stats)
             </div>
             <div className={`stats`}>
                 <div
-                    onClick={() => dispatch(changeStats('followers', 1))}
+                    onClick={() => dispatch(changeStats({statsType: 'followers', sum: 1}))}
                     onContextMenu={e => {
                         e.preventDefault();
-                        dispatch(changeStats('followers', -1));
+                        dispatch(changeStats({statsType: 'followers', sum: -1}));
                     }}
-                >Followers2: {followers}</div>
+                >Followers: {followers}</div>
                 <div
-                    onClick={() => dispatch(changeStats('following', 1))}
+                    onClick={() => dispatch(changeStats({statsType: 'following', sum: 1}))}
                     onContextMenu={e => {
                         e.preventDefault();
-                        dispatch(changeStats('following', -1));
+                        dispatch(changeStats({statsType: 'following', sum: -1}));
                     }}
-                >Following1: {following}</div>
+                >Following: {following}</div>
             </div>
         </div>
     );
